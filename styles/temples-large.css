@@ -1,0 +1,21 @@
+@media screen and (min-width: 700px) {
+    header {
+
+    grid-template-columns: 1fr 1fr;
+    }
+    #hamburger {
+        display: none;
+    }
+    nav ul {
+        display: flex;
+    }
+    main {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 1rem;
+    }
+    h2 {
+        grid-area: span 1 / span 3;
+        text-align: center;
+    }
+}
