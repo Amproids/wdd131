@@ -1,15 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WDD 131 - Place Page - Andrew L. Parry</title>
+    <title>Exploring Mexico - WDD 131 Place Page</title>
+    <meta name="description" content="Discover Mexico's rich culture, stunning landscapes, and diverse weather patterns in this comprehensive guide to one of North America's most vibrant countries.">
+    <meta name="author" content="Andrew L. Parry">
+    
+    <!-- Google Fonts with preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="styles/place.css">
     <script src="scripts/place.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>Mexico</h1>
+        <h1>Exploring Mexico's Rich Culture and Landscape</h1>
     </header>
     <main>
         <!-- Hero Image section -->
@@ -17,10 +25,10 @@
             <picture>
                 <source srcset="images/mexico-large.webp" media="(min-width: 800px)">
                 <source srcset="images/mexico-medium.webp" media="(min-width: 400px)">
-                <img src="images/mexico-small.webp" alt="Scenic view of Mexico">
+                <img src="images/mexico-small.webp" alt="Scenic panoramic view of Mexico showing traditional architecture and natural landscapes">
             </picture>
         </section>
-
+        
         <!-- Country Data section -->
         <section id="country-data">
             <h2>Country Information</h2>
@@ -35,11 +43,11 @@
                 <p><strong>Government:</strong> Federal Republic</p>
             </div>
         </section>
-
+        
         <!-- Weather section -->
         <section id="country-weather">
             <h2>Weather</h2>
-            <img src="images/weather-icon.svg" alt="Weather icon" class="weather-icon-mobile">
+            <img src="images/weather-icon.svg" alt="Weather conditions icon" class="weather-icon-mobile">
             <div class="weather-data">
                 <p>Temperature: <span id="temperature">24</span>°C</p>
                 <p>Condition: Partly Cloudy</p>
