@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD 131 - Place Page - Andrew L. Parry</title>
+    <link rel="stylesheet" href="styles/place.css">
+    <script src="scripts/place.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Mexico</h1>
+    </header>
+    <main>
+        <!-- Hero Image section -->
+        <section id="hero-image">
+            <picture>
+                <source srcset="images/mexico-large.webp" media="(min-width: 800px)">
+                <source srcset="images/mexico-medium.webp" media="(min-width: 400px)">
+                <img src="images/mexico-small.webp" alt="Scenic view of Mexico">
+            </picture>
+        </section>
+
+        <!-- Country Data section -->
+        <section id="country-data">
+            <h2>Country Information</h2>
+            <div class="data-grid">
+                <p><strong>Area:</strong> 1,972,550 km²</p>
+                <p><strong>Population:</strong> 130.2 million</p>
+                <p><strong>Capital:</strong> Mexico City</p>
+                <p><strong>Languages:</strong> Spanish</p>
+                <p><strong>Currency:</strong> Mexican Peso (MXN)</p>
+                <p><strong>Time Zone:</strong> UTC-6 to UTC-8</p>
+                <p><strong>Phone Code:</strong> +52</p>
+                <p><strong>Government:</strong> Federal Republic</p>
+            </div>
+        </section>
+
+        <!-- Weather section -->
+        <section id="country-weather">
+            <h2>Weather</h2>
+            <img src="images/weather-icon.svg" alt="Weather icon" class="weather-icon-mobile">
+            <div class="weather-data">
+                <p>Temperature: <span id="temperature">24</span>°C</p>
+                <p>Condition: Partly Cloudy</p>
+                <p>Wind Speed: <span id="windspeed">15</span> km/h</p>
+                <p>Wind Chill: <span id="windchill"></span></p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; <span id="currentYear"></span> | Andrew L. Parry | Last Modified: <span id="lastModified"></span></p>
+    </footer>
+</body>
+</html>
