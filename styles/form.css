@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #f5f5f5;
@@ -203,8 +203,7 @@ footer {
     outline-offset: 2px;
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
+@media (forced-colors: active) {
     body {
         background-color: white;
     }
