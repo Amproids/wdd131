@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning With Andrew: Computing & Concepts</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <meta name="author" content="Andrew L. Parry">
+    <meta name="description" content="A learning blog focused on visual computing concepts, featuring interactive demonstrations and practical applications.">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="menu-link">Home</a></li>
+                <li><a href="#featured-content" class="menu-link">Projects</a>
+                    <ul id="projects-menu">
+                        <li><a href="project/boids.html">Visualizing Boids</a></li>
+                        <li><a href="project/fabric.html">Fabric And Rope Simulation</a></li>
+                    </ul>
+                </li>
+                <li><a href="siteplan.html" class="menu-link">Site Plan</a></li>
+                <li><a href="contact.html" class="menu-link">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Exploring Visual Computing Concepts</h1>
+            <p>Welcome to a journey through computational systems, simulations, and their real-world applications.</p>
+        </section>
+
+        <section id="featured-content">
+            <h2>Featured Projects</h2>
+            <div class="project-cards">
+                <article class="project-card" data-project="boids">
+                    <h3>Boid Simulation</h3>
+                    <img src="images/boids-preview.jpg" alt="Preview of boid simulation" loading="lazy">
+                    <p>Explore the fascinating world of flocking behavior and emergent systems through interactive demonstrations.</p>
+                    <a href="project/boids.html" class="button">Learn More</a>
+                </article>
+
+                <article class="project-card" data-project="fabric">
+                    <h3>Fabric Simulation</h3>
+                    <img src="images/fabric-preview.jpg" alt="Preview of fabric simulation" loading="lazy">
+                    <p>Discover how physics-based simulations bring realistic cloth and rope movements to life.</p>
+                    <a href="project/fabric.html" class="button">Learn More</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="newsletter">
+            <h2>Stay Updated</h2>
+            <form id="subscribe-form" class="subscribe-form">
+                <label for="email">Subscribe to our newsletter:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                <button type="submit" class="button">Subscribe</button>
+            </form>
+            <div id="subscription-message" class="hidden"></div>
+        </section>
+
+        <section class="recent-updates">
+            <h2>Recent Updates</h2>
+            <div id="updates-container">
+                <!-- Dynamic content will be loaded here via JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="siteplan.html">Site Plan</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="attributions.html">Attributions</a></li>
+                    <li><a href="https://github.com/yourusername/wdd131">GitHub Repository</a></li>
+                </ul>
+            </div>
+            <div class="footer-section" id="copyright">
+                <p>&copy; <span id="current-year"></span> Learning With Andrew. All rights reserved.</p>
+                <p>Last modified: <span id="last-modified-date"></span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="scripts/main.js"></script>
+</body>
+</html>
