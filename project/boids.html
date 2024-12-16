@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boids Simulation | Learning With Andrew</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/boids.css">
+    <meta name="author" content="Andrew L. Parry">
+    <meta name="description" content="Interactive boids simulation demonstrating flocking behavior and emergent systems.">
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100" height="100">
+                    <g transform="translate(100,100) rotate(90)">
+                        <polygon points="150,60 225,105 225,195 150,240 75,195 75,105" fill="none" stroke="#2ecc71" stroke-width="6" transform="translate(-150,-150)"/>
+                        <polygon points="150,90 195,120 195,180 150,210 105,180 105,120" fill="#27ae60" opacity="0.3" transform="translate(-150,-150)"/>
+                        <circle cx="0" cy="-60" r="10" fill="#27ae60"/>
+                        <circle cx="0" cy="60" r="10" fill="#27ae60"/>
+                        <circle cx="75" cy="0" r="10" fill="#27ae60"/>
+                        <circle cx="-75" cy="0" r="10" fill="#27ae60"/>
+                        <circle cx="0" cy="0" r="30" fill="#145a32">
+                            <animateMotion
+                            path="M0,0 L0,0 L15,-10.5 L15,-10.5 L-12,12 L-12,12 L-7.5,-13.5 L-7.5,-13.5 L0,18 L0,18 L0,0 L0,0"
+                            dur="100s"
+                            keyTimes="0; 0.2; 0.205; 0.21; 0.215; 0.22; 0.225; 0.23; 0.235; 0.24; 0.245; 1"
+                            keySplines="0 0 0 0; 0.5 0 0.5 1; 0.5 0 0.5 1; 0.5 0 0.5 1; 0.5 0 0.5 1; 0.5 0 0.5 1; 0.5 0 0.5 1; 0.5 0 0.5 1; 0.5 0 0.5 1; 0.5 0 0.5 1; 0 0 0 0"
+                            calcMode="spline"
+                            repeatCount="indefinite"/>
+                        </circle>
+                    </g>
+                </svg>
+            </div>
+            <h1>Learning With Andrew</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html" class="menu-link">Home</a></li>
+                    <li><a href="../index.html#featured-content" class="menu-link">Projects</a>
+                        <ul id="projects-menu">
+                            <li><a href="boids.html">Visualizing Boids</a></li>
+                            <li><a href="fabric.html">Fabric And Rope Simulation</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../siteplan.html" class="menu-link">Site Plan</a></li>
+                    <li><a href="../contact.html" class="menu-link">Contact Me</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Boids Simulation</h1>
+            <p>Explore the fascinating world of emergent behavior through this interactive flocking simulation.</p>
+        </section>
+
+        <section class="simulation-container">
+            <div class="canvas-wrapper">
+                <canvas id="boids-canvas"></canvas>
+            </div>
+            
+            <!-- Replace the controls-panel div in boids.html with this -->
+            <div class="controls-panel">
+                <h2>Simulation Controls</h2>
+                <div class="control-group">
+                    <label for="num-boids">Number of Boids:</label>
+                    <input type="range" id="num-boids" min="10" max="200" value="100">
+                    <span class="value-display" id="num-boids-value">100</span>
+                </div>
+                
+                <div class="control-group">
+                    <label for="speed">Speed:</label>
+                    <input type="range" id="speed" min="1" max="5" step="0.5" value="1.5">
+                    <span class="value-display" id="speed-value">1.5</span>
+                </div>
+                <div class="control-group">
+                    <label for="avoid-walls">Avoid Walls:</label>
+                    <input type="checkbox" id="avoid-walls">
+                </div>
+                
+                <div class="control-group">
+                    <label for="separation">Separation:</label>
+                    <input type="range" id="separation" min="0" max="2" step="0.1" value="1.5">
+                    <span class="value-display" id="separation-value">1.5</span>
+                </div>
+                
+                <div class="control-group">
+                    <label for="alignment">Alignment:</label>
+                    <input type="range" id="alignment" min="0" max="2" step="0.1" value="1.2">
+                    <span class="value-display" id="alignment-value">1.2</span>
+                </div>
+                
+                <div class="control-group">
+                    <label for="cohesion">Cohesion:</label>
+                    <input type="range" id="cohesion" min="0" max="2" step="0.1" value="0.8">
+                    <span class="value-display" id="cohesion-value">0.8</span>
+                </div>
+
+                <button id="reset-simulation" class="button">Reset Simulation</button>
+            </div>
+        </section>
+
+        <section class="explanation">
+            <h2>How It Works</h2>
+            <div class="explanation-content">
+                <article>
+                    <h3>What are Boids?</h3>
+                    <p>The Boids model, created by Craig Reynolds in 1986, is a classic example of artificial life, simulating the flocking behavior seen in birds and other animal groups. The term "boid" refers to a "bird-like object," an autonomous agent that follows a set of simple rules. What makes Boids so fascinating is that complex flocking patterns emerge from the interactions of these individual agents, each acting independently based on local information. This is known as emergent behavior: the whole is greater than the sum of its parts. The Boids simulation beautifully illustrates how order can arise from decentralized control.</p>
+                    <p>In our model, the boids will have a limit to their turn rate, and will scale directly with their speed. Meaning the speed wont affect the simulation, it will simply slow it down. Like slo-motion.</p>
+                </article>
+
+                <article>
+                    <h3>The Three Rules</h3>
+                    <div class="rules-list">
+                        <div class="rule">
+                            <h4>Separation</h4>
+                            <p>Boids will steer away from nearby boids and obsticles.</p>
+                        </div>
+                        <div class="rule">
+                            <h4>Alignment</h4>
+                            <p>Boids will try to align their steering direction with the direction of neighboring boids.</p>
+                        </div>
+                        <div class="rule">
+                            <h4>Cohesion</h4>
+                            <p>Boids try to fly towards the center of mass of neighboring boids.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article>
+                    <h3>Applications</h3>
+                    <p>The principles behind boids have found applications in various fields:</p>
+                    <ul>
+                        <li>Computer Graphics and Animation</li>
+                        <li>Crowd Behavior Simulation</li>
+                        <li>Autonomous Systems and Robotics</li>
+                        <li>Traffic Flow Modeling</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../siteplan.html">Site Plan</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="../attributions.html">Attributions</a></li>
+                    <li><a href="https://github.com/yourusername/wdd131">GitHub Repository</a></li>
+                </ul>
+            </div>
+            <div class="footer-section" id="copyright">
+                <p>&copy; <span id="current-year"></span> Learning With Andrew. All rights reserved.</p>
+                <p>Last modified: <span id="last-modified-date"></span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="scripts/main.js"></script>
+    <script defer src="scripts/boids.js"></script>
+</body>
+</html>
