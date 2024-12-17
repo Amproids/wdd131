@@ -23,13 +23,29 @@ class Boid {
     }
 
     draw(ctx) {
+        // calculate verticies
+        let verticies = [
+            [this.size, 0],
+            [Math.cos(Math.PI / 4*3) * this.size, Math.sin(Math.PI / 4*3) * this.size/1.5],
+            [Math.cos(Math.PI / 4*5) * this.size, Math.sin(Math.PI / 4*5) * this.size/1.5],
+            [this.size, 0]
+        ]
+
+        // Rotate the verticies around boid position
+        verticies = verticies.map(vertex => [
+            vertex[0] * Math.cos(this.direction) - vertex[1] * Math.sin(this.direction) + this.position.x,
+            vertex[0] * Math.sin(this.direction) + vertex[1] * Math.cos(this.direction) + this.position.y
+        ])
+
+        // Draw the boid
         ctx.fillStyle = this.color;
-        ctx.fillRect(
-            this.position.x - this.size / 2,
-            this.position.y - this.size / 2,
-            this.size,
-            this.size
-        );
+        ctx.beginPath();
+        ctx.moveTo(verticies[0][0], verticies[0][1]);
+        ctx.lineTo(verticies[1][0], verticies[1][1]);
+        ctx.lineTo(verticies[2][0], verticies[2][1]);
+        ctx.lineTo(verticies[3][0], verticies[3][1]);
+        ctx.closePath();
+        ctx.fill();
     }
 
     updatePosition(canvas, deltaTime) {
