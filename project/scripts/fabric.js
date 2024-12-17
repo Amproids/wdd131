@@ -96,7 +96,7 @@ class FabricSimulation {
             gravity: 0.8,
             stiffness: 0.3,
             damping: 0.96,
-            pinPoints: 2,
+            pinPoints: 4,
             wind: false,
             type: 'fabric'
         };
@@ -258,7 +258,7 @@ class FabricSimulation {
 
     createRope() {
         const segments = 20;
-        const marginX = this.canvas.width * 0.1;
+        const marginX = this.canvas.width * 0.2;
         const spacingX = (this.canvas.width - 2 * marginX) / segments;
 
         // Create points
