@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fabric Simulation | Learning With Andrew</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/fabric.css">
+    <meta name="author" content="Andrew L. Parry">
+    <meta name="description" content="Interactive fabric and rope physics simulation demonstrating mass-spring systems and cloth dynamics.">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100" height="100">
+                    <g transform="translate(100,100) rotate(90)">
+                        <polygon points="150,60 225,105 225,195 150,240 75,195 75,105" fill="none" stroke="#2ecc71" stroke-width="6" transform="translate(-150,-150)"/>
+                        <polygon points="150,90 195,120 195,180 150,210 105,180 105,120" fill="#27ae60" opacity="0.3" transform="translate(-150,-150)"/>
+                        <circle cx="0" cy="-60" r="10" fill="#27ae60"/>
+                        <circle cx="0" cy="60" r="10" fill="#27ae60"/>
+                        <circle cx="75" cy="0" r="10" fill="#27ae60"/>
+                        <circle cx="-75" cy="0" r="10" fill="#27ae60"/>
+                        <circle cx="0" cy="0" r="30" fill="#145a32">
+                            <animateMotion
+                            path="M0,0 L0,0 L15,-10.5 L15,-10.5 L-12,12 L-12,12 L-7.5,-13.5 L-7.5,-13.5 L0,18 L0,18 L0,0 L0,0"
+                            dur="100s"
+                            keyTimes="0; 0.2; 0.205; 0.21; 0.215; 0.22; 0.225; 0.23; 0.235; 0.24; 0.245; 1"
+                            keySplines="0 0 0 0; 0.5 0 0.5 1; 0.5 0 0.5 1; 0.5 0 0.5 1; 0.5 0 0.5 1; 0.5 0 0.5 1; 0.5 0 0.5 1; 0.5 0 0.5 1; 0.5 0 0.5 1; 0.5 0 0.5 1; 0 0 0 0"
+                            calcMode="spline"
+                            repeatCount="indefinite"/>
+                        </circle>
+                    </g>
+                </svg>
+            </div>
+            <h1>Learning With Andrew</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="menu-link">Home</a></li>
+                    <li><a href="../index.html#featured-content" class="menu-link">Projects</a>
+                        <ul id="projects-menu">
+                            <li><a href="boids.html">Visualizing Boids</a></li>
+                            <li><a href="fabric.html">Fabric And Rope Simulation</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../siteplan.html" class="menu-link">Site Plan</a></li>
+                    <li><a href="../contact.html" class="menu-link">Contact Me</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Fabric & Rope Physics</h1>
+            <p>Explore the fascinating world of mass-spring systems through this interactive cloth and rope simulation.</p>
+        </section>
+
+        <section class="simulation-container">
+            <div class="canvas-wrapper">
+                <canvas id="fabric-canvas"></canvas>
+            </div>
+            
+            <div class="controls-panel">
+                <h2>Simulation Controls</h2>
+                <div class="control-group">
+                    <label for="simulation-type">Simulation Type:</label>
+                    <select id="simulation-type">
+                        <option value="fabric">Fabric</option>
+                        <option value="rope">Rope</option>
+                        <option value="curtain">Curtain</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="gravity">Gravity:</label>
+                    <input type="range" id="gravity" min="0" max="2" step="0.1" value="0.8">
+                    <span class="value-display" id="gravity-value">0.8</span>
+                </div>
+
+                <div class="control-group">
+                    <label for="stiffness">Spring Stiffness:</label>
+                    <input type="range" id="stiffness" min="0.1" max="1" step="0.1" value="0.3">
+                    <span class="value-display" id="stiffness-value">0.3</span>
+                </div>
+
+                <div class="control-group">
+                    <label for="damping">Damping:</label>
+                    <input type="range" id="damping" min="0.8" max="1" step="0.01" value="0.96">
+                    <span class="value-display" id="damping-value">0.96</span>
+                </div>
+
+                <div class="control-group">
+                    <label for="pin-points">Pin Points:</label>
+                    <input type="number" id="pin-points" min="2" max="10" value="2">
+                </div>
+
+                <div class="control-group">
+                    <label for="wind">Enable Wind:</label>
+                    <input type="checkbox" id="wind">
+                </div>
+
+                <button id="reset-simulation" class="button">Reset Simulation</button>
+            </div>
+        </section>
+
+        <section class="explanation">
+            <h2>Understanding Mass-Spring Systems</h2>
+            <div class="explanation-content">
+                <article>
+                    <h3>What are Mass-Spring Systems?</h3>
+                    <p>Mass-spring systems are a fundamental technique in physics simulation, used to model deformable objects like cloth, rope, and soft bodies. The system consists of a network of points (masses) connected by springs that follow Hooke's Law. When external forces like gravity or wind are applied, the system responds by calculating the forces on each mass and updating their positions accordingly.</p>
+                </article>
+
+                <article>
+                    <h3>Key Components</h3>
+                    <div class="components-list">
+                        <div class="component">
+                            <h4>Mass Points</h4>
+                            <p>Particles with position and velocity that respond to forces.</p>
+                        </div>
+                        <div class="component">
+                            <h4>Springs</h4>
+                            <p>Connections between mass points that maintain structure and transmit forces.</p>
+                        </div>
+                        <div class="component">
+                            <h4>Forces</h4>
+                            <p>External influences like gravity, wind, and user interaction that affect the system.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article>
+                    <h3>Applications</h3>
+                    <p>Mass-spring systems are widely used in:</p>
+                    <ul>
+                        <li>Video Game Physics and Animation</li>
+                        <li>Computer Graphics and Visual Effects</li>
+                        <li>Virtual Clothing and Fashion Design</li>
+                        <li>Engineering Simulations</li>
+                        <li>Interactive Digital Art</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../siteplan.html">Site Plan</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="../attributions.html">Attributions</a></li>
+                    <li><a href="https://github.com/yourusername/wdd131">GitHub Repository</a></li>
+                </ul>
+            </div>
+            <div class="footer-section" id="copyright">
+                <p>&copy; <span id="current-year"></span> Learning With Andrew. All rights reserved.</p>
+                <p>Last modified: <span id="last-modified-date"></span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="scripts/main.js"></script>
+    <script defer src="scripts/fabric.js"></script>
+</body>
+</html>
